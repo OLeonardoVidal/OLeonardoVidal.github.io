@@ -1,13 +1,15 @@
 const img = document.getElementById('leonardo-img');
 
-function moveImage() {
-    const x = Math.random() * window.innerWidth;
-    const y = Math.random() * window.innerHeight;
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    
+    // Ajusta a posição da imagem com base na rolagem
+    img.style.transform = `translateY(${scrollY}px)`;
 
-    img.style.position = 'absolute';
-    img.style.left = `${x}px`;
-    img.style.top = `${y}px`;
-}
-
-// Move the image every 2 segundos
-setInterval(moveImage, 2000);
+    // Adiciona um efeito de bounce
+    img.style.transition = 'transform 0.1s ease';
+    img.style.transform += ' translateY(-10px)'; // Ajuste a altura do bounce
+    setTimeout(() => {
+        img.style.transform = `translateY(${scrollY}px)`; // Volta para a posição original
+    }, 100);
+});
